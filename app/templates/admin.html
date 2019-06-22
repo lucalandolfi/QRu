@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block navbarbuttons %}
+  <li><a href="{{ url_for('admin')}}">Home</a></li>
+  <li><a href="{{ url_for('logout') }}">Logout</a></li>
+{% endblock %}
+
+{% block page_content %}
+  <div class="page-header">
+    <h1> Welcome back, master {{username}}! </h1>
+  </div>
+
+  <div class="container">
+    <h2> Devices </h2>
+    <div id="devices" class="panel-group">
+      {% for device in device_list %}
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#devices" href="#deviceinfo{{device.id}}">
+                  {{device.name}}
+              </a>
+            </h4>
+          </div>
+          <div class="panel-collapse collapse" id="deviceinfo{{device.id}}">
+            <div class="panel-body deviceinfo">
+                Device # {{device.id}} <br>
+                Name = {{device.name}} <br>
+                Mode = {{device.mode}} <br>
+                API key = {{device.key}} <br>
+                <br>
+                {% if device.mode == 'whitelist' %}
+                Authorization list <br>
+                <ul>
+                  {% for auth in device.whitelist %}
+                  <li> {{ auth.username }} </li>
+                  {% endfor %}
+                </ul>
+                <br>
+                {% endif %}
+                <br>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="container">
+      <h2> Operations </h2>
+      <a class="btn btn-primary" href="{{url_for('newdevice')}}" role="button">Add device</a>
+      <a class="btn btn-primary" href="{{url_for('deletedevice')}}" role="button">Delete device</a>
+      <a class="btn btn-primary" href="{{url_for('setdevice')}}" role="button">Set device mode</a>
+      <a class="btn btn-primary" href="{{url_for('authorize')}}" role="button">Authorize user</a>
+      <a class="btn btn-primary" href="{{url_for('revoke')}}" role="button">Revoke authorization</a>
+    </div>
+  </div>
+</div>
+<br>
+{% endblock %}

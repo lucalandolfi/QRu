@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}
+  QRU - Not authorized
+{% endblock %}
+
+{% block navbarbuttons %}
+  <li><a href="{{ url_for('login') }}">Login</a></li>
+{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+  <h1> Not authorized </h1>
+</div>
+{% endblock %}
