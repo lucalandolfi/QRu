@@ -25,12 +25,13 @@ pip3 install -r requirements.txt
 First, create the database schema and create an admin user
 ```
 flask shell
-from app.models import db, Admin
-db.create_all()
-a = Admin(username=someusername, password=somepassword)
-db.session.add(a)
-db.session.commit()
-exit()
+[...]
+>>> from app.models import db, Admin
+>>> db.create_all()
+>>> a = Admin(username=someusername, password=somepassword)
+>>> db.session.add(a)
+>>> db.session.commit()
+>>> exit()
 ```
 
 ## Run
