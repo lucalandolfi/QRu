@@ -1,17 +1,18 @@
 # QRu
 QRu (Q-are-you) is a QR code based authentication system. It's a web app, implemented using Flask microframework. It is intended to be used together with QRu-rasp https://github.com/lucalandolfi/QRu-rasp .
+In order to authenticate users, it uses REST APIs of UniParthenope Esse3 instance.
 
-## Prerequisites
+## Install
 QRu uses pip3 to manage dependencies, so it is required. To install it on debian-based systems
 ```
 apt-get install python3-pip
 ```
-## Install
 
 ### Download
 ```
 git clone https://github.com/lucalandolfi/QRu.git
 ```
+
 ### Setup
 Create virtual environment and install dependencies
 ```
@@ -43,3 +44,6 @@ or edit and run supplied test script
 sh tests/test.sh
 ```
 SECRET_KEY is a 32 byte, base64 encoded, URL safe string which is used as key to encrypt and sign token and to generate API keys for QRu-rasp devices. 
+
+## Usage
+Once the server is up and running, using the web interface you need to generate one or more API keys, which need to be distributed to any raspberry pi running QRu-rasp application.
