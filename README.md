@@ -23,16 +23,17 @@ pip3 install -r requirements.txt
 ```
 
 ### Database creation
-First, create the database schema and create an admin user
+First, create the database schema and create an admin user. Open a flask python shell from command line
 ```
 flask shell
-[...]
->>> from app.models import db, Admin
->>> db.create_all()
->>> a = Admin(username=someusername, password=somepassword)
->>> db.session.add(a)
->>> db.session.commit()
->>> exit()
+```
+and, inside python shell, execute
+```
+from app.models import db, Admin
+db.create_all()
+a = Admin(username=someusername, password=somepassword)
+db.session.add(a)
+db.session.commit()
 ```
 
 ## Run
@@ -43,7 +44,16 @@ or edit and run supplied test script
 ```
 sh tests/test.sh
 ```
-SECRET_KEY is a 32 byte, base64 encoded, URL safe string which is used as key to encrypt and sign token and to generate API keys for QRu-rasp devices. 
 
+### Key generation
+SECRET_KEY is a 32 byte, base64 encoded, URL safe string. It is used as key to encrypt and sign tokens and to generate API keys for QRu-rasp devices. A suitabable key can be generated with the following python code, using the same library used by QRu for encryption
+ ```
+from cryptography.fernet import Fernet
+Fernet.generate_key().decode()
+ ```
+ the output is a string
+ ```
+ 'GxdY_OX0vFPTc-fxClqZhI5zjNvhKPQls4uZeP_9Pwo='
+```
 ## Usage
 Once the server is up and running, using the web interface you need to generate one or more API keys, which need to be distributed to any raspberry pi running QRu-rasp application.
